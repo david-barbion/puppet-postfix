@@ -31,6 +31,15 @@ class postfix::params {
       $newaliases_path = '/usr/bin/newaliases.postfix'
       $sendmail_path = '/usr/sbin/sendmail.postfix'
       $postmap = '/usr/sbin/postmap'
+      $opendkim_package = ['opendkim', 'opendkim-tools'] # need epel
+      $opendkim_config_file = '/etc/opendkim.conf'
+      $opendkim_config_dir = '/etc/opendkim'
+      $opendkim_config_template = 'postfix/opendkim.conf.erb'
+      $opendkim_config_canonicalization = 'relaxed/simple'
+      $opendkim_host = 'localhost'
+      $opendkim_port = '12301'
+      $opendkim_service = 'opendkim'
+      $opendkim_trusted_hosts = ['127.0.0.1', 'localhost']
     }
     'Debian': {
       $command_directory = '/usr/sbin'
@@ -56,6 +65,15 @@ class postfix::params {
       $newaliases_path = '/usr/bin/newaliases.postfix'
       $sendmail_path = '/usr/sbin/sendmail.postfix'
       $postmap = '/usr/sbin/postmap'
+      $opendkim_package = ['opendkim', 'opendkim-tools']
+      $opendkim_config_file = '/etc/opendkim.conf'
+      $opendkim_config_dir = '/etc/opendkim'
+      $opendkim_config_template = 'postfix/opendkim.conf.erb'
+      $opendkim_config_canonicalization = 'relaxed/simple'
+      $opendkim_host = 'localhost'
+      $opendkim_port = '12301'
+      $opendkim_service = 'opendkim'
+      $opendkim_trusted_hosts = ['127.0.0.1', 'localhost']
     }
     'FreeBSD': {
       $command_directory = '/usr/local/sbin'
@@ -81,6 +99,15 @@ class postfix::params {
       $newaliases_path = '/usr/local/bin/newaliases'
       $sendmail_path = '/usr/local/sbin/sendmail'
       $postmap = '/usr/local/sbin/postmap'
+      $opendkim_package = 'mail/opendkim' # not tested
+      $opendkim_config_file = '/usr/local/etc/mail/opendkim.conf'
+      $opendkim_config_dir = '/usr/local/etc/mail/opendkim'
+      $opendkim_config_template = 'postfix/opendkim.conf.erb'
+      $opendkim_config_canonicalization = 'relaxed/simple'
+      $opendkim_host = 'localhost'
+      $opendkim_port = '12301'
+      $opendkim_service = 'milter-opendkim'
+      $opendkim_trusted_hosts = ['127.0.0.1', 'localhost']
     }
     default: {
       fail("Unsupported OS family ${::osfamily}")

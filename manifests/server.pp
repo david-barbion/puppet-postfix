@@ -143,6 +143,16 @@ class postfix::server (
   $postgrey                = false,
   $postgrey_policy_service = undef,
   $clamav                  = false,
+  $opendkim                = false,
+  $opendkim_package                 = $::postfix::params::opendkim_package,
+  $opendkim_config_file             = $::postfix::params::opendkim_config_file,
+  $opendkim_config_dir              = $::postfix::params::opendkim_config_dir,
+  $opendkim_config_template         = $::postfix::params::opendkim_config_template,
+  $opendkim_config_canonicalization = $::postfix::params::opendkim_config_canonicalization,
+  $opendkim_host                    = $::postfix::params::opendkim_host,
+  $opendkim_port                    = $::postfix::params::opendkim_port,
+  $opendkim_service                 = $::postfix::params::opendkim_service,
+  $opendkim_trusted_hosts           = $::postfix::params::opendkim_trusted_hosts,
   # Parameters
   $command_directory      = $::postfix::params::command_directory,
   $config_directory       = $::postfix::params::config_directory,
@@ -267,5 +277,9 @@ class postfix::server (
     }
   }
 
+  if $opendkim {
+    include '::postfix::opendkim'
+  }
+  
 }
 
