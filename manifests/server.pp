@@ -62,6 +62,14 @@ class postfix::server (
   $smtpd_tls_key_file = undef,
   $smtpd_tls_cert_file = undef,
   $smtpd_tls_CAfile = undef,
+  $smtpd_tls_protocols = undef,
+  $smtpd_tls_exclude_ciphers = undef,
+  $smtpd_tls_eecdh_grade = undef,
+  $smtpd_tls_dh1024_param_file = undef,
+  $smtpd_tls_dh512_param_file = undef,
+  $smtpd_create_dh_param_file = false,
+  $smtpd_tls_dh2048_param_file = '/etc/postfix/dh2048.pem',
+  $tls_preempt_cipherlist = undef, # bool
   $smtpd_sasl_auth = false,
   $smtpd_sasl_type = 'dovecot',
   $smtpd_sasl_path = 'private/auth',
@@ -247,6 +255,16 @@ class postfix::server (
     content    => template('postfix/body_checks.erb'),
     group      => $root_group,
     postfixdir => $config_directory,
+  }
+
+  # create dh file if specified
+  if $smtpd_create_dh_param_file {
+    exec { "openssl dhparam -out ${smtpd_tls_dh2048_param_file} 2048":
+      creates => $smtpd_tls_dh2048_param_file,
+      path    => [ '/bin', '/usr/bin', '/usr/local/bin' ],
+      notify  => Service['postfix'],
+      require => Package[$package_name],
+    }
   }
 
 }

@@ -756,6 +756,28 @@ smtpd_tls_ask_ccert = yes
 <% if @tls_append_default_CA -%>
 tls_append_default_CA = yes
 <% end -%>
+<% if @smtpd_tls_protocols -%>
+smtpd_tls_protocols = <%= @smtpd_tls_protocols.join(",") %>
+<% end -%>
+<% if @smtpd_tls_exclude_ciphers -%>
+smtpd_tls_exclude_ciphers = <%= @smtpd_tls_exclude_ciphers.join(',') %>
+<% end -%>
+<% if @smtpd_tls_eecdh_grade -%>
+smtpd_tls_eecdh_grade = <%= @smtpd_tls_eecdh_grade %>
+<% end -%>
+<% if @tls_preempt_cipherlist  -%>
+tls_preempt_cipherlist  = yes
+<% end -%>
+<% if @smtpd_tls_dh512_param_file -%>
+smtpd_tls_dh512_param_file = <%= @smtpd_tls_dh512_param_file %>
+<% end -%>
+<% if @smtpd_tls_dh1024_param_file -%>
+smtpd_tls_dh1024_param_file = <%= @smtpd_tls_dh1024_param_file %>
+<% end -%>
+<% if @smtpd_create_dh_param_file -%>
+smtpd_tls_dh512_param_file = <%= @smtpd_tls_dh2048_param_file %>
+smtpd_tls_dh1024_param_file = <%= @smtpd_tls_dh2048_param_file %>
+<% end -%>
 
 <% end -%>
 <% if @smtpd_sasl_auth -%>
