@@ -84,6 +84,7 @@ class postfix::server (
   $smtp_tls_secure_cert_match = undef,
   $smtp_tls_note_starttls_offer = false,
   $smtp_tls_mandatory_ciphers = undef,
+  $smtp_tls_policy_maps = undef,
   $smtpd_tls_ask_ccert = false,
   $tls_append_default_CA = false,
   $smtp_sasl_tls = false,

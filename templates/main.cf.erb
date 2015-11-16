@@ -824,6 +824,9 @@ smtp_tls_note_starttls_offer = yes
 <% if @smtp_tls_mandatory_ciphers -%>
 smtp_tls_mandatory_ciphers = <%= @smtp_tls_mandatory_ciphers %>
 <% end -%>
+<% if @smtp_tls_policy_maps -%>
+smtp_tls_policy_maps = <%= @smtp_tls_policy_maps %>
+<% end -%>
 
 <% end -%>
 
